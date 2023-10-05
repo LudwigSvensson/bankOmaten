@@ -11,39 +11,9 @@ namespace bankOmaten
             Welcome();
             Thread.Sleep(1000);
             while (tries != 0)
-            {
-                
-                    Showtries(tries);
-                    LoggaIn(ref tries);
-                
-                while (tries == 6)
-                {
-                    Console.WriteLine("[1]. Se dina konton och dess saldon\n[2]. Se dina konton och dess saldon\n[3]. Se dina konton och dess saldon\n[4]. Logga ut");
-                    int uInput = Convert.ToInt32(Console.ReadLine());
-                    switch (uInput)
-                    {
-                        case 1:
-                            Console.WriteLine("[1]. Se dina konton och dess saldon");
-                            break;
-                        case 2:
-                            Console.WriteLine("[2]. Se dina konton och dess saldon");
-                            break;
-                        case 3:
-                            Console.WriteLine("[3]. Se dina konton och dess saldon");
-                            break;
-                        case 4:
-                            Console.WriteLine("[4]. Logga ut");
-                            tries--;
-                            Console.Clear();
-                            Console.WriteLine("Återvänder till Inloggning.......");
-                            Thread.Sleep(1500);
-                            Console.Clear();
-                            
-                            break;
-                        default:
-                            break;
-                    }
-                }
+            {                
+                Showtries(tries);
+                LoggaIn(ref tries);                               
           }
             Console.Clear();
             Console.WriteLine("Du har förbrukat dina fem försök för att logga in, now fuck off");
@@ -61,21 +31,28 @@ namespace bankOmaten
         {
             try
             {
+                string[] users = new string[3] { "ludwig", "anas", "marcus" };
                 Console.Write("Vänligen ange Användarnamn: ");
                 var user = Console.ReadLine().ToLower();
                 Console.Write("Vänligen ange din sexsiffriga pinkod: ");
                 var pw = Convert.ToInt32(Console.ReadLine());
-                if (pw == 123456 && user == "ludwig")
+                if (pw == 123456 && (users.Contains(user)))
                 {
-                    Console.Clear();
-                    Console.WriteLine("Inloggning lyckades! \n Välkommen till din bank!...");
-                    Thread.Sleep(1000);
-                    Console.WriteLine(".......");
-                    Thread.Sleep(1500);
-                    Console.WriteLine(".......");
-                    Console.Clear();
-                    return tries = 6;
+                    tries = 6;
+                    while (tries ==6)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Inloggning lyckades!");
+                        Thread.Sleep(1000);
+                        Console.WriteLine("..........\n........... \n............");
+                        Thread.Sleep(1500);
+                        Console.Clear();
+                        Bankmeny(ref tries, user);
+                    }  
+                    
+                    return tries;  
                 }
+
                 else 
                 {
                     Console.Clear();
@@ -93,8 +70,38 @@ namespace bankOmaten
         static void Showtries(int tries)
         {                     
                 Console.WriteLine($"Du har {tries} försök kvar");
-                Thread.Sleep(1000);
-            
+                Thread.Sleep(1000);  
+        }
+        static int Bankmeny(ref int tries,string user)
+        {
+            Console.WriteLine($"Välkommen {user}");
+            Console.WriteLine("[1]. Se dina konton och dess saldon\n[2]. Se dina konton och dess saldon\n[3]. Se dina konton och dess saldon\n[4]. Logga ut");
+            int uInput = Convert.ToInt32(Console.ReadLine());
+
+            switch (uInput)
+            {
+                case 1:
+                    Console.WriteLine("[1]. Se dina konton och dess saldon");
+                    break;
+                case 2:
+                    Console.WriteLine("[2]. Se dina konton och dess saldon");
+                    break;
+                case 3:
+                    Console.WriteLine("[3]. Se dina konton och dess saldon");
+                    break;
+                case 4:
+                    Console.WriteLine("[4]. Logga ut");                    
+                    Console.Clear();
+                    Console.WriteLine("Återvänder till Inloggning.......");
+                    Thread.Sleep(1500);
+                    Console.Clear();
+                    return tries--;
+                    break;
+                default:
+                    Console.WriteLine("Ogiltigt val, försök igen");
+                    break;
+            }
+            return tries;
         }
     }
 }
