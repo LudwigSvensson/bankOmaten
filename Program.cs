@@ -86,6 +86,18 @@ namespace bankOmaten
                 {
                     case 1:
                         Console.WriteLine("[1]. Se dina konton och dess saldon");
+                        if (user == "ludwig")
+                        {
+                            LudwigsKonton();
+                        }
+                        else if (user=="anas")
+                        {
+                            AnasKonton();
+                        }
+                        else if (user=="marcus")
+                        {
+                            MarcusKonton();    
+                        }
                         break;
 
                     case 2:
@@ -138,5 +150,34 @@ namespace bankOmaten
 
             return tries;
         }
+        
+       static void LudwigsKonton()
+       {
+            Console.Clear(); 
+            double kortKonto = 100.50;
+            double sparkonto = 1000.50;
+            Console.WriteLine($"{kortKonto}:-");
+            Console.ReadKey();
+            Console.Clear();
+        }
+        static void AnasKonton()
+        {
+            Console.Clear();
+            double kortKonto = 100.49;
+            double sparkonto = 1000.49;
+            Console.WriteLine($"{kortKonto}");
+            Console.ReadKey();
+            Console.Clear();
+        }
+        static void MarcusKonton()
+        {
+            Console.Clear();
+            double kortKonto = 100.48;
+            double sparKonto = 1000.48;
+            Console.WriteLine($"{kortKonto}");
+            Console.ReadKey();
+            Console.Clear();
+        }
+
     }
 }
